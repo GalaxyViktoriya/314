@@ -16,11 +16,9 @@ public class UserController {
         return "user/login";
     }
 
-    @GetMapping("/")
+    @GetMapping("/auth")
     public String show(@AuthenticationPrincipal User user, ModelMap model) {
         model.addAttribute("user", user);
         return "user/user_panel";
     }
-
-
 }

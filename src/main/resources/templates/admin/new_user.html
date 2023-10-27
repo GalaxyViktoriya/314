@@ -25,7 +25,7 @@
         <h1 class="m-3 fw-bold">Панель администратора</h1>
         <div class="tab-content" id="tabContent">
             <ul class="nav nav-tabs">
-                <a class="nav-link" data-toggle="tab" th:href="@{/admin/}">Таблица Пользователей</a>
+                <a class="nav-link" data-toggle="tab" th:href="@{/admin/auth}">Таблица Пользователей</a>
                 <a class="nav-link active" data-toggle="tab">Создать нового пользователя</a>
             </ul>
             <div class="col-md bg-white border">
@@ -58,9 +58,13 @@
                     <input th:name="password" th:field="*{password}" th:type="password" class="form-control" id="password"/>
                     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" >Ошибка пароля</div>
                     <br>
-                    <label for="roles"><b>Добавить роль(ADMIN или USER)</b></label>
-                    <input th:name="roles" th:type="text" th:field="*{roles}" class="form-control" id="roles"/>
-                    <div style="color:red" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" >Ошибка роли</div>
+                    <label for="roles"><b>Добавить роль</b></label>
+                    <select multiple class="form-control" id="roles" name="roles" size="2" required>
+                        <option th:each="role: ${roles}" th:value="${role.userRole}" th:selected="${user.roles.contains(role)}">
+                            <th:block th:text="${role.userRole}">
+                            </th:block>
+                        </option>
+                    </select>
                     <br>
                     <button th:type="submit" class="btn btn-success btn-lg" value="Add new user">Добавить нового пользователя
                     </button>

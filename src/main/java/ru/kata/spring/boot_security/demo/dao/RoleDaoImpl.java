@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-@Transactional
 public class RoleDaoImpl implements RoleDao {
 
     @PersistenceContext

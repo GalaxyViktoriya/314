@@ -26,7 +26,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/auth")
     public String getAdminPage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("user", user);
@@ -50,14 +50,14 @@ public class AdminController {
                 user.setRoles(Collections.singleton(roleService.getRole(s)));
             }
             userService.saveUser(user);
-            return "redirect:/admin/";
+            return "redirect:/admin/auth";
         }
     }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
-        return "redirect:/admin/";
+        return "redirect:/admin/auth";
     }
 
     @PatchMapping("/edit/{id}")
@@ -69,6 +69,6 @@ public class AdminController {
             }
             userService.updateUser(user);
         }
-        return "redirect:/admin/";
+        return "redirect:/admin/auth";
     }
 }
