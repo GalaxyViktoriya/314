@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.model.User;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     @GetMapping(value = "/login")
@@ -16,7 +15,7 @@ public class UserController {
         return "user/login";
     }
 
-    @GetMapping("/auth")
+    @GetMapping("/user")
     public String show(@AuthenticationPrincipal User user, ModelMap model) {
         model.addAttribute("user", user);
         return "user/user_panel";
