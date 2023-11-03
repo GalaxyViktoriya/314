@@ -9,7 +9,6 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import java.util.List;
 
 @Service
-@Transactional
 public class RoleServiceImpl implements RoleService {
     private final RoleDao roleDao;
 
@@ -34,6 +33,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public void addRole(Role role) {
         roleDao.addRole(role);
     }

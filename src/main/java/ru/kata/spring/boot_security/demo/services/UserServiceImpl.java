@@ -15,7 +15,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
@@ -28,12 +27,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.saveUser(user);
     }
 
     @Override
+    @Transactional
     public void updateUser(@Valid User user) {
         if (!user.getPassword().equals(userDao.getUserById(user.getId()).getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(long id) {
         userDao.deleteUser(id);
     }

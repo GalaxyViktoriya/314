@@ -45,6 +45,9 @@ public class AdminController {
                              @RequestParam(value = "roles") String[] selectResult) {
         if (bindingResult.hasErrors()) {
             return "admin/new_user";
+        } else if (userService.getAllUsers().contains(userService.getUserByLogin(user.getLogin()))) {
+
+            return "admin/new_user";
         } else {
             for (String s : selectResult) {
                 user.setRoles(Collections.singleton(roleService.getRole(s)));

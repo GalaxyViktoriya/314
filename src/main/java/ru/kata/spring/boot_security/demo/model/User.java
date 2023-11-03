@@ -39,8 +39,8 @@ public class User implements UserDetails {
     @Email
     private String email;
 
-    @Column(name = "login")
-    @NotEmpty(message = "Login should be between 2 and 25 latin characters")
+    @Column(name = "login", unique = true)
+    @NotEmpty(message = "Name should be between 2 and 25 characters")
     @Size(min = 2, max = 25)
     private String login;
 
