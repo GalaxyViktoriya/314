@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userDao.saveUser(user);
+        userDao.saveAndFlush(user);
     }
 
     @Override
@@ -39,18 +39,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (!user.getPassword().equals(userDao.getUserById(user.getId()).getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        userDao.updateUser(user);
+        userDao.saveAndFlush(user);
     }
 
     @Override
     @Transactional
     public void deleteUser(long id) {
-        userDao.deleteUser(id);
+        userDao.deleteById(id);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        return userDao.findAll();
     }
 
     @Override
